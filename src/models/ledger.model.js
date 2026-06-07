@@ -36,7 +36,7 @@ const ledgerSchema = new mongoose.Schema({
 })
 
 
-function preventLedgerModification(next) {  //ledger entries are immutable, once they are created they cannot be modified or deleted, isliye hum ledger entry ko modify ya delete karne ki koshish karne par error throw karenge
+function preventLedgerModification(next) {  
      throw new Error("Ledger entries are immutable and cannot be modified or deleted");
 }
 
