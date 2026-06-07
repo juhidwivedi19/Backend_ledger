@@ -31,7 +31,7 @@ async function UserRegisterController(req,res){
     
     const token=jwt.sign({userId:user._id},process.env.JWT_SECRET, {
         expiresIn:"3d"
-    })   //jwt token generate karne ke liye jwt.sign() function ka use karte hai, isme payload, secret key aur options pass karte hai
+    })  
   
    res.cookie("token", token)
 
@@ -45,8 +45,7 @@ async function UserRegisterController(req,res){
    })
 
 
-   await emailService.sendRegistrationEmail(user.email,user.name) //user register hone ke baad registration email send karne ke liye email service ka use karte hai, isme user ka email aur name pass karte hai taki email me user ka name include ho sake
-
+   await emailService.sendRegistrationEmail(user.email,user.name)
 }
 
 
@@ -58,7 +57,7 @@ async function UserRegisterController(req,res){
  async function UserLoginController(req,res){
     const{email,password} =req.body
 
-    const user= await userModel.findOne({email}).select("+password")  //login karte waqt password bhi fetch karna padega compare karne ke liye, islie select("+password") ka use karte hai kyuki user model me password select:false hai
+    const user= await userModel.findOne({email}).select("+password") 
 
     if(!user){
         return res.status(401).json({
@@ -66,7 +65,7 @@ async function UserRegisterController(req,res){
         })
     }
 
-   const isValidPassword = await user.comparePassword(password)  //user model me comparePassword method banaya hai jisme bcrypt ka use karke password compare karte hai
+   const isValidPassword = await user.comparePassword(password) 
 
     if(!isValidPassword){
         return res.status(401).json({
