@@ -14,10 +14,10 @@ const tokenBlacklistSchema = new mongoose.Schema({
 })
 
 
-//Token permanent ke lie nhi hota hai 
+
 
 tokenBlacklistSchema.index({ createdAt: 1},{
-    expiresAfterSeconds: 60 * 60 * 24 *3  //3 days
+    expiresAfterSeconds: 60 * 60 * 24 *3 
 })  
 
 
