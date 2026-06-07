@@ -1,12 +1,12 @@
 const express=require("express");
-const cookieParser = require("cookie-parser") //cookie parser middleware ka use karte hai, isse hum cookies ko read kar sakte hai
+const cookieParser = require("cookie-parser") 
 
 
 
 const app=express();
 
 
-app.use(express.json())  //hamara express req.body ke data ko nhi read kar sakta islie read karane ke li EXPRESS.JSON MIDDLEWARE ka use karte hai
+app.use(express.json()) 
 app.use(cookieParser())
 
 
@@ -22,16 +22,16 @@ const transactionRouter = require("./routes/transaction.routes")
 * --Use Routes
 */
 
-app.get("/",(req,res)=>{  //sare server me ye api hoti hai
+app.get("/",(req,res)=>{ 
     res.send("Ledger service is up  and running")
 })
 
 
-app.use("/api/auth",authRouter)  //jab bhi /api/auth pe request aayegi to authRouter ko use karenge
-app.use("/api/accounts",accountRouter)  //jab bhi /api/accounts pe request aayegi to accountRouter ko use karenge
-app.use("/api/transactions",transactionRouter)  //jab bhi /api/transactions pe request aayegi to transactionRouter ko use karenge
+app.use("/api/auth",authRouter)  
+app.use("/api/accounts",accountRouter) 
+app.use("/api/transactions",transactionRouter)  
 
 
 
-module.exports=app  //ise hum export karenge server.js me
+module.exports=app 
 
