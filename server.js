@@ -1,9 +1,9 @@
-require("dotenv").config() //jab tak ye nhi likhoge process.env.mongo uri ka use nhi kar sakte
+require("dotenv").config() 
 
-const app = require("./src/app");  //yaha humne app.js ko import kiya hai
+const app = require("./src/app"); 
 const connectToDB=require("./config/db");
 
-connectToDB() //yaha humne DB se connect karne ke liye function call kiya hai
+connectToDB() 
 
 
 app.listen(3000,()=>{
