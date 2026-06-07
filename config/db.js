@@ -8,7 +8,7 @@ function connectToDB(){
     })
     .catch(err=>{
         console.log("Error connecting to DB")
-        process.exit(1) //agar DB se connect nahi ho paya to server ko band kar do
+        process.exit(1) 
     })
 }
 
