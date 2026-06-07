@@ -1,4 +1,4 @@
-// we  use middleware for authentication and authorization, so that we can protect our routes and make sure that only authenticated users can access certain routes, and also we can make sure that only authorized users can access certain routes based on their roles or permissions
+
 
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
