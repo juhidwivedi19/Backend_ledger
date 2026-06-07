@@ -1,7 +1,7 @@
 
 const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({  //hum transporter ka use karte hai SMTP server se connect karne ke liye, isme service aur auth details pass karte hai
+const transporter = nodemailer.createTransport({ 
   service: 'gmail',
   auth: {
     type: 'OAuth2',
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({  //hum transporter ka use karte
 });
 
 
-// Verify the connection configuration
+
 transporter.verify((error, success) => {
   if (error) {
     console.error('Error connecting to email server:', error);
@@ -24,15 +24,15 @@ transporter.verify((error, success) => {
 
 
 
-// Function to send email
+
 const sendEmail = async (to, subject, text, html) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Backend Ledger" <${process.env.EMAIL_USER}>`, // sender address
-      to, // list of receivers
-      subject, // Subject line
-      text, // plain text body
-      html, // html body
+      from: `"Backend Ledger" <${process.env.EMAIL_USER}>`,
+      to, 
+      subject, 
+      text, 
+      html, 
     });
 
     console.log('Message sent: %s', info.messageId);
@@ -52,7 +52,7 @@ async function sendRegistrationEmail(userEmail,name){
     const html= `<p>Hello,${name} </p><p>Thank you for registering with Backend-Ledger. We're excited to have you on board! If you have any questions or need assistance, feel free to reach out to our support team.</p><p>Best regards,</p><p>The Backend-Ledger Team</p>`
 
 
-     await sendEmail(userEmail,subject,text,html); //agar email send karne me error aata hai to hum dubara email send karne ki koshish karte hai, isme humne html body bhi pass ki hai jisme user ka name include hai
+     await sendEmail(userEmail,subject,text,html); 
 }
 
 
