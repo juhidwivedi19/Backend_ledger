@@ -122,7 +122,7 @@ async function createTransaction(req, res) {
            *  5.Create transaction(PENDING)
            */
 
-     const session = await mongoose.startSession()  //iske lie upar hum mongoose create karenge //MongoDB     
+     const session = await mongoose.startSession()  
 
     session.startTransaction()
 
@@ -132,7 +132,7 @@ async function createTransaction(req, res) {
        amount,
        idempotencyKey,
        status: "PENDING"
-    }], {session}))[0] //transaction create karenge, aur session pass karenge taki ye transaction ke andar execute ho
+    }], {session}))[0]
 
 
      const debitLedgerEntry = await ledgerModel.create([{
@@ -140,11 +140,10 @@ async function createTransaction(req, res) {
        amount: amount,
        transaction: transaction._id,
        type: "DEBIT"
-     }], {session})    //DEBIT ledger entry create karenge fromAccount ke liye, aur session pass karenge taki ye transaction ke andar execute ho
-        
+     }], {session})  
 
 
-      await (() => {   //create new promise
+      await (() => {  
             return new Promise((resolve) => setTimeout(resolve, 15 * 1000));
         })()
      
@@ -154,12 +153,12 @@ async function createTransaction(req, res) {
       amount: amount,
       transaction: transaction._id,
       type:"CREDIT"
-     }], {session})   //CREDIT ledger entry create karenge toAccount ke liye, aur session pass karenge taki ye transaction ke andar execute ho
+     }], {session})   
     
     
 
      transaction.status = "COMPLETED"
-     await transaction.save({ session})   //transaction status ko COMPLETED karenge, aur session pass karenge taki ye transaction ke andar execute ho
+     await transaction.save({ session})  
     
     
 
@@ -178,7 +177,7 @@ async function createTransaction(req, res) {
       * 10: Send email notification
       */
 
-     await emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toUserAccount.user)   //transaction email bhejenge sender ko, email me hum sender ka name, amount aur receiver ka name bhejenge
+     await emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toUserAccount.user)  
         
 
      return res.status(201).json({
@@ -189,7 +188,7 @@ async function createTransaction(req, res) {
     
     }
 
-async  function createInitialFundsTransaction(req,res){   //
+async  function createInitialFundsTransaction(req,res){   
     const {toAccount, amount, idempotencyKey} = req.body
 
        if(!toAccount || !amount || !idempotencyKey){
@@ -218,7 +217,7 @@ async  function createInitialFundsTransaction(req,res){   //
    })
 
 
-   if(!fromUserAccount) {   //agar system user ka account hi na mila to ye message denge
+   if(!fromUserAccount) {   
        return res.status(400).json({
         message: "System user account not found"
        })
